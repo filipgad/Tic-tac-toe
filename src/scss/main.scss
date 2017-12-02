@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+body {
+  background-color: #f7f7f7;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.square {
+  background: #6CA6CD;
+  border: 1px solid #000;
+  font-size: 24px;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  margin-right: 3px;
+  margin-top: 3px;
+}
+
+.square:focus {
+  outline: none;
+}

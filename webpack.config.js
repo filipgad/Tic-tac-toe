@@ -1,27 +1,22 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry : {
-        'js/out.js': './js/app.js',
-        'css/style.css~': './css/main.scss'
-    },
-    output : {
-        path: __dirname+'/',
-        filename: '[name]'
-    },
+    entry: ["./src/jsx/main.jsx","./src/scss/main.scss"],
+    output: { filename: "./dist/js/out.js" },
     devServer: {
         inline: true,
         contentBase: './',
         port: 3001
     },
     watch: true,
+
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.jsx$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                query: { presets: ['es2015', 'stage-2'] }
+                query: { presets: ['es2015', 'stage-2', 'react'] }
             },
             {
                 test: /\.scss$/,
@@ -30,6 +25,7 @@ module.exports = {
                     fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader']
                 })
+
             },
             {
                 test: /\.(png|jpg|gif)$/,
@@ -37,16 +33,14 @@ module.exports = {
                 use: [
                     {
                         loader: 'file-loader',
-                        options: {
-                            name: '[path][name].[ext]',
-                            outputPath: '../'
-                        }
+                        options: {}
                     }
                 ]
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin('./css/style.css')
+        new ExtractTextPlugin('./dist/css/style.css')
+
     ]
 };
