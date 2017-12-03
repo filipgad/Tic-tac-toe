@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom';
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    // square element
     class Square extends React.Component {
-      handleClick = () => {
-        this.props.onClick();
-      }
-
       render() {
-        return <button className="square" onClick={this.handleClick}>{this.props.value}</button>;
+        return <button className="square" onClick={ () => this.props.onClick()}>{this.props.value}</button>;
       }
     }
 
-    class Board extends React.Component {
+    // game board
+    class Game extends React.Component {
       constructor(props) {
         super(props);
         this.state = {
@@ -22,10 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
 
+      // X or O move
       handleClick(i) {
-        const squares = this.state.squares.slice();
+        const squares = this.state.squares.slice(); // use .slice() to copy existing squares array
         if (calculateWinner(squares) || squares[i]) {
-          return;
+          return; // block clicked element
         }
         squares[i] = this.state.nowX ? 'X' : 'O';
         this.setState({
@@ -34,11 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
 
+      // create squares
       renderSquare(i) {
         return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
       }
 
       render() {
+        // info who play and who win
         const winner = calculateWinner(this.state.squares);
         let status;
         if (winner) {
@@ -48,25 +49,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         return (
-          <div>
+          <div id="game">
             <div id="player-info">
               <h1>{status}</h1>
             </div>
             <div id="board">
               <div className="board-row">
+                {this.renderSquare(0)}
                 {this.renderSquare(1)}
                 {this.renderSquare(2)}
-                {this.renderSquare(3)}
               </div>
               <div className="board-row">
+                {this.renderSquare(3)}
                 {this.renderSquare(4)}
                 {this.renderSquare(5)}
-                {this.renderSquare(6)}
               </div>
               <div className="board-row">
+                {this.renderSquare(6)}
                 {this.renderSquare(7)}
                 {this.renderSquare(8)}
-                {this.renderSquare(9)}
               </div>
             </div>
           </div>
@@ -74,6 +75,22 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    class App extends React.Component {
+      render() {
+        return (
+          <div>
+            <Game />
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('app')
+    );
+
+    // check if someone won
     function calculateWinner(squares) {
       const lines = [
         [0, 1, 2],
@@ -83,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         [1, 4, 7],
         [2, 5, 8],
         [0, 4, 8],
-        [2, 4, 6],
+        [2, 4, 6]
       ];
       for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
@@ -93,24 +110,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       return null;
     }
-
-    class Game extends React.Component {
-
-    }
-
-    class App extends React.Component {
-      render() {
-        return (
-          <div>
-            <Board />
-          </div>
-        );
-      }
-    }
-
-
-    ReactDOM.render(
-      <App />,
-      document.getElementById('app')
-    );
 });
