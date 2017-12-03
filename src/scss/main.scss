@@ -9,21 +9,34 @@ body {
   background-color: #f7f7f7;
 }
 
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+#game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100%;
+}
+
+#board {
+  width: 50vh;
+  height: 50vh;
+}
+
+.board-row {
+  width: 100%;
+  height: 33.33333%;
 }
 
 .square {
   background: #6CA6CD;
-  border: 1px solid #000;
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
-  width: 100px;
-  height: 100px;
-  margin-right: 3px;
-  margin-top: 3px;
+  width: 33.33333%;
+  height: 100%;
+  border-radius: 0;
+  border: 2px solid #000;
 }
 
 .square:focus {
