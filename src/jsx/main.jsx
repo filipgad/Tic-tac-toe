@@ -39,13 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       render() {
-        // info who play and who win
+        // info whose turn or who won
         const winner = calculateWinner(this.state.squares);
         let status;
         if (winner) {
           status = 'Winner: ' + winner;
         } else {
-          status = 'Next player: ' + (this.state.nowX ? 'X' : 'O');
+          status = 'Now player: ' + (this.state.nowX ? 'X' : 'O');
         }
 
         return (
