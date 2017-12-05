@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // info whose turn or who won
         const winner = calculateWinner(this.state.squares);
         let status;
-        if (winner) {
+        if (winner == "draw") {
+          status = "It's a draw";
+        } else if (winner) {
           status = 'Winner: ' + winner;
         } else {
           status = 'Now player: ' + (this.state.nowX ? 'X' : 'O');
@@ -90,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('app')
     );
 
-    // check if someone won
+    // check win or draw
     function calculateWinner(squares) {
       const lines = [
         [0, 1, 2],
@@ -102,12 +104,27 @@ document.addEventListener('DOMContentLoaded', function() {
         [0, 4, 8],
         [2, 4, 6]
       ];
+      let checkDraw = 0;
+
+      // check win
       for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
           return squares[a];
         }
       }
-      return null;
+
+      // check draw
+      for (let i=0; i<squares.length; i++) {
+        if (squares[i] !== null) {
+          checkDraw++
+        }
+      }
+
+      if (checkDraw == 9) {
+        return 'draw';
+      } else {
+        return null;
+      }
     }
 });
