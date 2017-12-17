@@ -9697,10 +9697,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }, {
       key: 'render',
       value: function render() {
-        // info who play and who win
+        // info whose turn or who won
         var winner = calculateWinner(this.state.squares);
         var status = void 0;
-        if (winner) {
+        if (winner == "draw") {
+          status = "It's a draw";
+        } else if (winner) {
           status = 'Winner: ' + winner;
         } else {
           status = 'Now player: ' + (this.state.nowX ? 'X' : 'O');
@@ -9775,9 +9777,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 
-  // check if someone won
+  // check win or draw
   function calculateWinner(squares) {
     var lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+    var checkDraw = 0;
+
+    // check win
     for (var i = 0; i < lines.length; i++) {
       var _lines$i = _slicedToArray(lines[i], 3),
           a = _lines$i[0],
@@ -9788,7 +9793,19 @@ document.addEventListener('DOMContentLoaded', function () {
         return squares[a];
       }
     }
-    return null;
+
+    // check draw
+    for (var _i = 0; _i < squares.length; _i++) {
+      if (squares[_i] !== null) {
+        checkDraw++;
+      }
+    }
+
+    if (checkDraw == 9) {
+      return 'draw';
+    } else {
+      return null;
+    }
   }
 });
 
