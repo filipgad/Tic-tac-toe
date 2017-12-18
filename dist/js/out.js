@@ -9701,7 +9701,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var winner = calculateWinner(this.state.squares);
         var status = void 0;
         if (winner == "draw") {
-          status = "It's a draw";
+          status = "DRAW";
         } else if (winner) {
           status = 'Winner: ' + winner;
         } else {
