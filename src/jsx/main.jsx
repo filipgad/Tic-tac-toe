@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const winner = calculateWinner(this.state.squares);
         let status;
         if (winner == "draw") {
-          status = "It's a draw";
+          status = "DRAW";
         } else if (winner) {
           status = 'Winner: ' + winner;
         } else {
